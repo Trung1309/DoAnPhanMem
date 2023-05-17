@@ -49,6 +49,10 @@ body{
     border-radius: 10px;
 
 }
+.bg-check{
+	background: #2ecc71;
+	color: white;
+}
 .search-box button {
     background: white;
     border: none;

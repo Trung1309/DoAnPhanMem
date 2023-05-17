@@ -25,70 +25,76 @@
             <div class="title-page" style="margin-top: 150px; margin-bottom: 30px; text-align: center; font-size: 30px;">
                 TẠO ĐƠN HÀNG
             </div>
-            <form action="">
+            <p class="text-success" style="font-size: 20px; background: #d8ecdc;color: #2d5b42; 
+            	margin-left:100px; border-radius: 10px;">${messSuccsess}</p>
+            <form action="addOrder" method="post">
                 <div class="content-order">
                     <div class="title">
                         THÔNG TIN ĐƠN HÀNG
                     </div>
                     <div class="infor-oder">
                         <div class="col">
+                        	<div class="input-txt" style="display: none;">
+                                <span>Mã khách hàng</span><br>
+                                <input name="idKH"  type="text" placeholder="" class="input-1" value="${sessionScope.acc.tenDN }">
+                            </div>
                             <div class="input-txt">
                                 <span>Họ và tên <strong style="color: red; margin-left: 10px;">*</strong></span><br>
                                 <input type="text" placeholder="" class="input-1" value="${sessionScope.acc.hoTen }">
                             </div>
+                            
+                           
                             <div class="input-txt">
-                                <span>Địa chỉ lấy hàng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="text" placeholder="" class="input-1">
-                            </div>
-                            <div class="input-txt">
-                                <span>Tên người nhận <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="text" placeholder="" class="input-1">
-                            </div>
-                            <div class="input-txt">
-                                <span>Địa chỉ lấy hàng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="text" placeholder="" class="input-1">
+                                <span>Địa chỉ giao hàng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
+                                <input name="diaChiGH" type="text" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
                                 <span>Chọn tỉnh thành <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select name="tinhThanh" class="form-select" aria-label="Default select example">
+                                    <option selected>Chọn tỉnh</option>
+                                    <option value="TP Đà Nẵng">TP Đà Nẵng</option>
+                                    <option value="Gia Lai">Gia Lai</option>
+                                    <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                    <option value="Huế">Huế</option>
                                   </select>
                             </div>
                         
                             <div class="row-1">
                                 <div class="input-txt">
                                     <span>Quận /huyện<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select name="quanHuyen" class="form-select" aria-label="Default select example">
+                                        <option selected>Quận huyện</option>
+                                        <option value="Hải Châu">Hải Châu</option>
+                                        <option value="Liên Chiểu">Liên Chiểu</option>
+                                        <option value="Sơn Trà">Sơn Trà</option>
                                       </select>
                                 </div>
                                 
                                 <div class="input-txt">
                                     <span>Phường / xã<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select name="phuongXa" class="form-select" aria-label="Default select example">
+                                        <option selected>Phường / xã</option>
+                                        <option value="P.Thanh Bình">P.Thanh Bình</option>
+                                        <option value="P.Thanh Khê">P.Thanh Khê</option>
+                                        <option value="P.Thuận Phước">P.Thuận Phước </option>
+                                        <option value="P.Thạch Thang ">P.Thạch Thang : </option>
                                       </select>
                                 </div>
                             </div>
                             
                         </div>
                         <div class="col">
+                         	<div class="input-txt">
+                                <span>Tên người nhận <strong style="color: red; margin-left: 10px;">*</strong></span><br>
+                                <input name="tenNguoiNhan" type="text" placeholder="" class="input-1">
+                            </div>
                             <div class="input-txt">
                                 <span>SĐT người gửi <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="text" placeholder="" class="input-1">
+                                <input name="sdtNguoiGui" type="text" value="${sessionScope.acc.sdt }" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
                                 <span>Số điện thoại người nhận <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="text" placeholder="" class="input-1">
+                                <input name="sdtNguoiNhan"  type="text" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
                                 <span>Ghi chú <strong style="color: red; margin-left: 10px;">*</strong></span><br>
@@ -96,29 +102,15 @@
                             </div>
                             <div class="input-txt">
                                 <span>Dịch vụ vận chuyển<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select name="dichVu" class="form-select" aria-label="Default select example">
+                                    <option selected>Dịch vụ vận chuyển</option>
+                                    <option value="Chuyển phát nhanh">Chuyển phát nhanh</option>
+                                    <option value="Vận chuyển cơ bản">Vận chuyển cơ bản</option>
+                                    <option value="Vận chuyển quốc tế">Vận chuyển quốc tế</option>
                                     </select>
                             </div>
-                            <div class="row-1">
-                                <div class="input-txt">
-                                    <span>Khối lượng<strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                    <input type="text" placeholder="" class="input-1">
-                                </div>
-                                
-                                <div class="input-txt">
-                                    <span>Giá trị <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                    <input type="number" placeholder="" class="input-1">
-                                </div>
-                            </div>
-                            
-                            <div class="input-txt">
-                                <span>Tiền thu hộ<strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="text" placeholder="" class="input-1">
-                            </div>
+                			
+                         
                             
                         </div>
                     </div>
@@ -131,24 +123,25 @@
                         <div class="col">
                             <div class="input-txt">
                                 <span>Tên sản phẩm <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="text" placeholder="" class="input-1">
+                                <input name="tenSP" type="text" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
                                 <span>Loại sản phẩm<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select  class="form-select" aria-label="Default select example">
+                                    <option selected>Loại sản phẩm</option>
+                                    <option value="1">Thực phẩm</option>
+                                    <option value="2">Hàng dễ vỡ</option>
+                                    <option value="3">Hàng da dụng</option>
+                                    <option value="4">Đồ điện tử</option>
                                     </select>
                             </div>
                             <div class="input-txt">
-                                <span>Số lượng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="number" placeholder="" class="input-1">
+                                <span >Số lượng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
+                                <input name="soLuong" type="number" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
                                 <span>Khối lượng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <input type="number" placeholder="" class="input-1">
+                                <input name="khoiLuong" type="number" placeholder="" class="input-1">
                             </div>
                             
                             
@@ -166,7 +159,7 @@
                 </div>
                 <div class="row-button">
                     <button type="" style="background: #e74c3c; color: white; border: none; padding: 10px; width: 10%;">Huỷ</button>
-                    <button type="submit" style="background: #2ecc71; color: white; border: none; padding: 10px; width: 10%;">Xác nhận</button>
+                    <button type="submit"  style="background: #2ecc71; color: white; border: none; padding: 10px; width: 10%;">Xác nhận</button>
                 </div>
             </form>
         </div>

@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/doanphanmem/controller/DonHangController.java=UTF-8
 encoding//src/main/java/com/doanphanmem/controller/LoginController.java=UTF-8
+encoding//src/main/java/com/doanphanmem/controller/SearchController.java=UTF-8
+encoding//src/main/java/com/doanphanmem/controller/SearchControllerByNV.java=UTF-8
 encoding//src/main/java/com/doanphanmem/controller/SignupController.java=UTF-8
+encoding//src/main/java/com/doanphanmem/controller/addOrderController.java=UTF-8
+encoding//src/main/java/com/doanphanmem/controller/confilmController.java=UTF-8
+encoding//src/main/java/com/doanphanmem/controller/deleteOderController.java=UTF-8
 encoding//src/main/java/com/doanphanmem/dao/DonHangDao.java=UTF-8
