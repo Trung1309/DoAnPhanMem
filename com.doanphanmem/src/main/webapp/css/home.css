@@ -1,0 +1,7 @@
+.box-sd{
+	box-shadow: -webkit-box-shadow: 5px 5px 15px 5px #696969; 
+	box-shadow: 5px 5px 15px 5px #696969;
+}
+.bg-sd{
+	background: #f8f4f4;
+}

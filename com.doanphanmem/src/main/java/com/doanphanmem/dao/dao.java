@@ -8,6 +8,7 @@ import com.doanphammem.model.Admin;
 import com.doanphammem.model.KhachHang;
 import com.doanphammem.model.NhanVien;
 import com.doanphammem.model.QuanLi;
+import com.doanphammem.model.TableDonHang;
 import com.doanphanmem.connect.DatabaseHelper;
 
 public class dao {
@@ -131,10 +132,38 @@ public class dao {
 		
 	}
 	
+	public List<TableDonHang> getTableAllDonHangByKH(String idKH){
+		List<TableDonHang> list = new ArrayList<TableDonHang>();
+		String sql = "select MaDH,Sdt,NgayTaoDon,SdtNguoiNhan,TrangThaiDonHang\r\n" + 
+				"from tbl_DonHang as dh, tbl_KhachHang as kh\r\n" + 
+				"where dh.TenTKKH = kh.TenTKKH and dh.TenTKKH=? ";
+		
+		try {
+			conn = new DatabaseHelper().openConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, idKH);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(new TableDonHang(
+						rs.getInt(1), 
+						rs.getString(2), 
+						rs.getString(3), 
+						rs.getString(4), 
+						rs.getString(5)));
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+	}
+	
 	public static void main(String[] args) {
 		dao d = new dao();
-		System.out.println(d.loginKH("KH00001", "trung2002"));
-		System.out.println(d.loginNV("NV00001", "12345678"));
+		List<TableDonHang> list = d.getTableAllDonHangByKH("KH00001");
+		for (TableDonHang i : list) {
+			System.out.println(i);
+		}
 	}
 	
 }	

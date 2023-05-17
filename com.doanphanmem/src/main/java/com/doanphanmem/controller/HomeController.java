@@ -29,18 +29,7 @@ public class HomeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		
-		
-		String user = request.getParameter("idKH");
-		
-		
-		DonHangDao donHangDao = new DonHangDao();
-		List<DonHang> listAll = donHangDao.getAllListDonHang();
-		List<DonHang> listDHByKH = donHangDao.getAllListDonHangKH(user);
-		
-		request.setAttribute("listAllDonHang", listAll);
-		request.setAttribute("listAllDonHangKH", listDHByKH);
-		request.getRequestDispatcher("/views/home.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/home1.jsp").forward(request, response);
 	}
 
 	/**

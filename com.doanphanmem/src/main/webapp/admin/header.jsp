@@ -21,18 +21,18 @@
                 <ul>
                     
                      <c:if test="${sessionScope.acc.maQuyen == 1 }">
-                     	<a href="#" >
+                     	<a href="home" >
 	                        <li>TRANG CHỦ</li>
 	                    </a>
                     	<a href="nhanVien" >
 	                        <li>NGƯỜI DÙNG</li>
 	                    </a>
-	                    <a href="" >
-	                        <li>QUẢN LÍ</li>
+	                    <a href="quanli" >
+	                        <li>ĐƠN HÀNG</li>
 	                    </a>
                     </c:if>
                     <c:if test="${sessionScope.acc.maQuyen == 2 }">
-                    	<a href="home" >
+                    	<a href="nhanVien" >
 	                        <li>NHÂN VIÊN</li>
 	                    </a>
 	                    <a href="home" >
@@ -55,13 +55,13 @@
                     	</a>
                     </c:if>
                     <c:if test="${sessionScope.acc.maQuyen == 4 }">
-                    	<a href="#">
+                    	<a href="home">
                         	<li>TRANG CHỦ</li>
                     	</a>
-                    	<a href="home" >
+                    	<a href="quanli" >
 	                        <li>ĐƠN HÀNG</li>
 	                    </a>
-	                    <a href="home?idKH = ${sessionScope.acc.tenDN }">
+	                    <a href="">
                         	<li>DỊCH VỤ</li>
                     	</a>
                     </c:if>

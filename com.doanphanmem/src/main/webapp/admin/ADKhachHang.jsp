@@ -68,9 +68,9 @@
                 	<tr>
 	                    <td>${o.tenDN }</td>
 	                    <td>${o.hoTen}</td>
-	                    <td>${o.hoTen}</td>
-	                    <td>${o.hoTen}</td>
-	                    <td>${o.hoTen}</td>
+	                    <td>${o.email}</td>
+	                    <td>${o.sdt}</td>
+	                    <td>${o.maQuyen}</td>
                   	</tr>
                 </c:forEach> 
                 </c:if>
@@ -83,10 +83,10 @@
                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                   </li>
                   <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active" aria-current="page">
+                  <li class="page-item " aria-current="page">
                     <a class="page-link" href="#">2</a>
                   </li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">3</a></li>
                   <li class="page-item">
                     <a class="page-link" href="#">Next</a>
                   </li>
