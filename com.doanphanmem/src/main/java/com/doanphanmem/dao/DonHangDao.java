@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.doanphammem.model.DonHang;
+import com.doanphammem.model.ThongKe;
 import com.doanphanmem.connect.DatabaseHelper;
 
 import java.sql.*;
@@ -16,7 +17,7 @@ public class DonHangDao {
 		List<DonHang> list = new ArrayList<DonHang>();
 		//Khai báo một danh sách lưu trữ dữ liệu
 	
-		String sql = "select * \r\n" + 
+		String sql = "select *,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###')\r\n" + 
 				"from tbl_DonHang\r\n" + 
 				"order by MaDH desc";
 		try {
@@ -50,7 +51,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));													
+						rs.getString(22),
+						rs.getString(23)));													
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -65,7 +67,7 @@ public class DonHangDao {
 		List<DonHang> list = new ArrayList<DonHang>();
 		//Khai báo một danh sách lưu trữ dữ liệu
 	
-		String sql = "select * \r\n" + 
+		String sql = "select * ,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###') \r\n" + 
 				"from tbl_DonHang\r\n" + 
 				"where TenTKKH = ?\r\n" + 
 				"order by MaDH desc";
@@ -101,7 +103,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));						
+						rs.getString(22),
+						rs.getString(23)));						
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -130,7 +133,7 @@ public class DonHangDao {
 	}
 	
 	public List<DonHang> getPagingDonHang(String user,int numPage, int soLuong){
-		String sql = "select * \r\n" + 
+		String sql = "select *,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###') \r\n" + 
 				"from tbl_DonHang\r\n" + 
 				"where TenTKKH = ?\r\n" + 
 				"order by MaDH desc\r\n" + 
@@ -166,17 +169,18 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));		
+						rs.getString(22),
+						rs.getString(23)));		
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return list;
-	}
-	
+	}	
 	public void addDonHang(String tenNguoiNhan, String diaChiGiaoHang,
 			String tinhThanh, String quanHuyen, String phuongXa, String sdtNguoiNhan,
-			String dichVu, int khoiLuong,String tenSP, int soLuong, String tenTKKH ) {
+			String dichVu, int khoiLuong,String tenSP, int soLuong, String tenTKKH,String loaiGoiCuoc,
+			String hinhAnh) {
 		String sql = "EXEC proc_taoDonHang \r\n" + 
 				"	@tenNguoiNhan = ?,\r\n" + 
 				"	@diaChiGiaoHang  = ?,\r\n" + 
@@ -188,7 +192,9 @@ public class DonHangDao {
 				"	@khoiLuong = ?,\r\n" + 
 				"	@tenSP = ?,\r\n" + 
 				"	@soLuong = ?,\r\n" + 
-				"	@tenTKKH = ?";
+				"	@tenTKKH = ?,\r\n" +
+				"	@loaiGoiCuoc = ?,\r\n" +
+				"   @hinhAnh = ?";
 		try {
 			conn = new DatabaseHelper().openConnection();
 			ps = conn.prepareStatement(sql);
@@ -203,6 +209,8 @@ public class DonHangDao {
 			ps.setString(9, tenSP);
 			ps.setInt(10, soLuong);
 			ps.setString(11, tenTKKH);
+			ps.setString(12, loaiGoiCuoc);
+			ps.setString(13, hinhAnh);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -228,7 +236,7 @@ public class DonHangDao {
 	}
 	
 	public List<DonHang> getAllPagingDonHang(int numPage, int soLuong){
-		String sql = "select * \r\n" + 
+		String sql = "select * ,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###')\r\n" + 
 				"from tbl_DonHang\r\n" + 
 				"order by MaDH desc\r\n" + 
 				"OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
@@ -262,7 +270,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));		
+						rs.getString(22),
+						rs.getString(23)));		
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -300,7 +309,7 @@ public class DonHangDao {
 	
 	public DonHang getDetailDonHang(int maDH) {
 		String sql = "\r\n" + 
-				"SELECT *\r\n" + 
+				"SELECT *,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###')\r\n" + 
 				"FROM tbl_DonHang\r\n" + 
 				"WHERE MaDH = ?";
 		try {
@@ -331,7 +340,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22));		
+						rs.getString(22),
+						rs.getString(23));		
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -340,14 +350,14 @@ public class DonHangDao {
 	}
 	
 	public List<DonHang> searchDonHangByKH(String maDH,String sdt,String maKH) {
-		String sql = "select * \r\n" + 
+		String sql = "select *,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###') \r\n" + 
 				"from tbl_DonHang\r\n" + 
-				"where MaDH = ? or SdtNguoiNhan = ? and TenTKKH = ?";
+				"where MaDH like ? or SdtNguoiNhan = ? and TenTKKH = ?";
 		List<DonHang> list = new ArrayList<DonHang>();
 		try {
 			conn = new DatabaseHelper().openConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, maDH);
+			ps.setString(1,"%" + maDH + "%");
 			ps.setString(2, sdt);
 			ps.setString(3, maKH);
 			rs = ps.executeQuery();
@@ -374,7 +384,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));	
+						rs.getString(22),
+						rs.getString(23)));	
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -415,7 +426,7 @@ public class DonHangDao {
 	}
 	
 	public List<DonHang> filterDonHangByKH(String trangThai,String maKH) {
-		String sql = "select *\r\n" + 
+		String sql = "select * ,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###')\r\n" + 
 				"from tbl_DonHang\r\n" + 
 				"where TrangThaiDonHang = ? and TenTKKH = ?";
 		List<DonHang> list = new ArrayList<DonHang>();
@@ -448,7 +459,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));	
+						rs.getString(22),
+						rs.getString(23)));	
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -457,15 +469,16 @@ public class DonHangDao {
 	}
 	
 	public List<DonHang> searchDonHangByNV(String maDH,String sdt) {
-		String sql = "select * \r\n" + 
+		String sql = "select * ,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###')\r\n" + 
 				"from tbl_DonHang\r\n" + 
-				"where MaDH = ? or SdtNguoiNhan = ?";
+				"where MaDH like ? or SdtNguoiNhan like ?\r\n" +
+				"order by MaDH desc";
 		List<DonHang> list = new ArrayList<DonHang>();
 		try {
 			conn = new DatabaseHelper().openConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, maDH);
-			ps.setString(2, sdt);
+			ps.setString(1,"%"+maDH+"%");
+			ps.setString(2,"%"+sdt+"%");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				list.add(new DonHang(
@@ -490,7 +503,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));	
+						rs.getString(22),
+						rs.getString(23)));	
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -499,7 +513,7 @@ public class DonHangDao {
 	}
 	
 	public List<DonHang> filterDonHangByNV(String trangThai) {
-		String sql = "select *\r\n" + 
+		String sql = "select * ,format((soLuong * khoiLuong *MaGoiCuoc),'#,##,###')\r\n" + 
 				"from tbl_DonHang\r\n" + 
 				"where TrangThaiDonHang = ?\r\n" + 
 				"order by MaDH desc";
@@ -532,7 +546,8 @@ public class DonHangDao {
 						rs.getInt(19), 
 						rs.getInt(20), 
 						rs.getString(21), 
-						rs.getString(22)));	
+						rs.getString(22),
+						rs.getString(23)));	
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -540,12 +555,46 @@ public class DonHangDao {
 		return list;
 	}
 	
+	public String getSales() {
+		String sql = "select format(sum(soLuong * khoiLuong *MaGoiCuoc),'#,##,###')\r\n" + 
+				"from tbl_DonHang";
+		try {
+			conn = new DatabaseHelper().openConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getString(1);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 	
+	
+	public List<ThongKe> getDoanhThuTheoThang(){
+		String sql = "select MONTH(NgayTaoDon),(sum(soLuong * khoiLuong * MaGoiCuoc))\r\n" + 
+				"from tbl_DonHang\r\n" + 
+				"group by MONTH(NgayTaoDon)";
+		List<ThongKe> list = new ArrayList<ThongKe>();
+		try {
+			conn = new DatabaseHelper().openConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				list.add(new ThongKe(rs.getInt(1), rs.getInt(2)));		
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+	}
 	public static void main(String[] args) {
 		DonHangDao d=  new DonHangDao();
-		List<DonHang> l  = d.filterDonHangByNV("Đang Giao");
-		for(DonHang i : l) {
-			System.out.println(i);
+		List<ThongKe> list = d.getDoanhThuTheoThang();
+		for(ThongKe l : list) {
+			System.out.println(l);
 		}
 		
 	}

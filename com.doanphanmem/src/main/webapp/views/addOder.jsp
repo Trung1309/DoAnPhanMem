@@ -27,7 +27,7 @@
             </div>
             <p class="text-success" style="font-size: 20px; background: #d8ecdc;color: #2d5b42; 
             	margin-left:100px; border-radius: 10px;">${messSuccsess}</p>
-            <form action="addOrder" method="post">
+            <form action="addOrder" method="post" enctype="multipart/form-data">
                 <div class="content-order">
                     <div class="title">
                         THÔNG TIN ĐƠN HÀNG
@@ -104,9 +104,9 @@
                                 <span>Dịch vụ vận chuyển<strong style="color: red; margin-left: 10px;">*</strong></span>
                                 <select name="dichVu" class="form-select" aria-label="Default select example">
                                     <option selected>Dịch vụ vận chuyển</option>
-                                    <option value="Chuyển phát nhanh">Chuyển phát nhanh</option>
-                                    <option value="Vận chuyển cơ bản">Vận chuyển cơ bản</option>
-                                    <option value="Vận chuyển quốc tế">Vận chuyển quốc tế</option>
+                                    <option value="20000">Vận chuyển cơ bản <span style="color:red">(20000VNĐ/1kg)</span></option>
+                                    <option value="35000">Chuyển phát nhanh <span style="color:red">(35000VNĐ/1kg)</span></option>
+                                    <option value="50000">Vận chuyển quốc tế <span style="color:red">(50000VNĐ/1kg)</span></option>
                                     </select>
                             </div>
                 			
@@ -126,13 +126,13 @@
                                 <input name="tenSP" type="text" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
-                                <span>Loại sản phẩm<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                <select  class="form-select" aria-label="Default select example">
+                                <span>Loại khối lượng sản phẩm<strong style="color: red; margin-left: 10px;">*</strong></span>
+                                <select name="loaiGoiCuoc"  class="form-select" aria-label="Default select example">
                                     <option selected>Loại sản phẩm</option>
-                                    <option value="1">Thực phẩm</option>
-                                    <option value="2">Hàng dễ vỡ</option>
-                                    <option value="3">Hàng da dụng</option>
-                                    <option value="4">Đồ điện tử</option>
+                                    <option value="Hàng dễ vỡ">Hàng dễ vỡ</option>
+                                    <option value="Hàng da dụng">Hàng da dụng</option>
+                                    <option value="Đồ điện tử">Đồ điện tử</option>
+                                    <option value="Đồ thời trang"> > Đồ thời trang</option>
                                     </select>
                             </div>
                             <div class="input-txt">
@@ -140,7 +140,7 @@
                                 <input name="soLuong" type="number" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
-                                <span>Khối lượng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
+                                <span>Khối lượng (kg) <strong style="color: red; margin-left: 10px;">*</strong></span><br>
                                 <input name="khoiLuong" type="number" placeholder="" class="input-1">
                             </div>
                             
@@ -151,7 +151,7 @@
                                 <label for="formFileMultiple" class="upload"><i class="fa-solid fa-upload" style="color: #e74c3c; font-size: 100px;" ></i>
                                 </label>                            
                                 <label for="formFileMultiple" class="form-label">Kéo thả hoặc tải lệp lên</label>
-                                <input class="form-control" type="file" id="formFileMultiple" multiple />                     
+                                <input name="hinhAnh" class="form-control" type="file" id="formFileMultiple" multiple />                     
                                 
                             </div>                          
                         </div>

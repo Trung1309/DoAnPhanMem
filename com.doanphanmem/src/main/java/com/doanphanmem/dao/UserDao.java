@@ -76,11 +76,26 @@ public class UserDao {
 		
 	}
 	
+	public int getCountUsers() {
+		String sql = "\r\n" + 
+				"select count(*)\r\n" + 
+				"from tbl_KhachHang";
+		try {
+			conn= new DatabaseHelper().openConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getInt(1);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return 0;
+	}
 	public static void main(String[] args) {
 		UserDao u = new UserDao();
-		List<NhanVien> kh = u.getListAllNV();
-		for(NhanVien i : kh) {
-			System.out.println(i);
-		}
+		int i = u.getCountUsers();
+		System.out.println(i);
 	}
 }

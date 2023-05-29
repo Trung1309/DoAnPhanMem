@@ -44,6 +44,7 @@ public class FilterControllerByNV extends HttpServlet {
 		DonHangDao d = new DonHangDao();
 		
 		List<DonHang> list = d.filterDonHangByNV(trangThai);
+		
 		request.setAttribute("listAllDH", list);
 		request.setAttribute("txtTT", trangThai);
 		request.getRequestDispatcher("/views/manager.jsp").forward(request, response);

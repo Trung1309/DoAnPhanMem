@@ -23,6 +23,7 @@ public class DonHang {
 	private int soLuong;
 	private String hoTenNguoiNhan;
 	private String loaiGoiCuoc;
+	private String thanhTien;
 	public int getMaDH() {
 		return maDH;
 	}
@@ -155,13 +156,22 @@ public class DonHang {
 	public void setLoaiGoiCuoc(String loaiGoiCuoc) {
 		this.loaiGoiCuoc = loaiGoiCuoc;
 	}
+	
+	
+	public String getThanhTien() {
+		return thanhTien;
+	}
+	public void setThanhTien(String thanhTien) {
+		this.thanhTien = thanhTien;
+	}
 	public DonHang() {
 		super();
 	}
 	public DonHang(int maDH, String sdtNguoiNhan, String ngayTaoDon, String donGia, String ngayGiaoHang,
 			String trangThaiDonHang, String trangThaiGiaoHang, String diaChiGH, String hinhAnh, String tenTKKH,
 			String tenTKNV, String maGoiCuoc, int maVC, String phuongXa, String quanHuyen, String tinhThanh,
-			String tenSP, String loaiSP, int khoiLuong, int soLuong, String hoTenNguoiNhan, String loaiGoiCuoc) {
+			String tenSP, String loaiSP, int khoiLuong, int soLuong, String hoTenNguoiNhan, String loaiGoiCuoc,
+			String thanhTien) {
 		super();
 		this.maDH = maDH;
 		this.sdtNguoiNhan = sdtNguoiNhan;
@@ -185,6 +195,7 @@ public class DonHang {
 		this.soLuong = soLuong;
 		this.hoTenNguoiNhan = hoTenNguoiNhan;
 		this.loaiGoiCuoc = loaiGoiCuoc;
+		this.thanhTien = thanhTien;
 	}
 	@Override
 	public String toString() {
@@ -194,7 +205,8 @@ public class DonHang {
 				+ ", tenTKKH=" + tenTKKH + ", TenTKNV=" + TenTKNV + ", maGoiCuoc=" + maGoiCuoc + ", maVC=" + maVC
 				+ ", phuongXa=" + phuongXa + ", quanHuyen=" + quanHuyen + ", tinhThanh=" + tinhThanh + ", tenSP="
 				+ tenSP + ", loaiSP=" + loaiSP + ", khoiLuong=" + khoiLuong + ", soLuong=" + soLuong
-				+ ", hoTenNguoiNhan=" + hoTenNguoiNhan + ", loaiGoiCuoc=" + loaiGoiCuoc + "]";
+				+ ", hoTenNguoiNhan=" + hoTenNguoiNhan + ", loaiGoiCuoc=" + loaiGoiCuoc + ", thanhTien=" + thanhTien
+				+ "]";
 	}
 	
 	

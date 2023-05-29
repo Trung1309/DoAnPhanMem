@@ -60,25 +60,19 @@
 	            <h3 class="card-title">Chi tiết đơn hàng</h3>
 	            <div class="row">
 	                <div class="col-lg-5 col-md-5 col-sm-6" style="height: 500px;overflow: hidden;">
-	                    <div class="white-box text-center"><img src="https://www.bootdey.com/image/430x600/00CED1/000000" class="img-responsive"></div>
+	                    <div class="white-box text-center"><img src="<c:url value="/imageOrder/${dt.hinhAnh }"></c:url>" class="img-responsive" style="width: 100%;height: 100%;object-fit:cover"></div>
 	                </div>
-	                <div class="col-lg-7 col-md-7 col-sm-6">
-	                    <h4 class="box-title mt-5">Mô tả</h4>
-	                    <p>Lorem Ipsum available,but the majority have suffered alteration in some form,by injected humour,or randomised words which don't look even slightly believable.but the majority have suffered alteration in some form,by injected humour</p>
-	                    
-	                    <ul class="list-unstyled">
-	                        <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
-	                        <li><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-	                        <li><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful collectibles</li>
-	                    </ul>
-	                </div>
-	                <div class="col-lg-12 col-md-12 col-sm-12">
-	                    <h3 class="box-title mt-5">Thông tin chi tiết</h3>
+	                <div class="col-lg-7 col-md-7 col-sm-6" style="margin-top: -60px">
+	                    <h4 class="box-title mt-5" ">Chi tiết sản phẩm</h4>
 	                    <div class="table-responsive">
 	                        <table class="table table-striped table-product">
 	                            <tbody>
+	                            	<tr>
+	                                    <td >Số tiền thanh toán </td>
+	                                    <td>${dt.thanhTien} <span style="font-weight: 800">VNĐ</span></td>
+	                                </tr>
 	                                <tr>
-	                                    <td width="390">Số điện thoại người nhận</td>
+	                                    <td >Số điện thoại người nhận</td>
 	                                    <td>${dt.sdtNguoiNhan }</td>
 	                                </tr>
 	                                <tr>
@@ -114,10 +108,11 @@
 	                        </table>
 	                    </div>
 	                </div>
+	                </div>
+	                
 	            </div>
 	        </div>
 	    </div>
-	</div>
 	</div>
 	<%@ include file="footter.jsp" %>
 	

@@ -48,7 +48,7 @@
         	<c:if test="${sessionScope.acc.maQuyen == 3 }">       		
 	        		<div class="row-one">
 	                <form action="searchByNV" method="post" class="search-box">
-	                    <input name="txt" type="text" placeholder="Nhập mã đơn hàng hoặc sdt người nhận	">
+	                    <input name="txt" type="text" placeholder="Nhập mã đơn hàng hoặc sdt người nhận	" value="${txtSearch }">
 	                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 	                </form>	                
 	            </div>           
@@ -120,8 +120,8 @@
 	                    <th scope="col" style="color: white;">Mã DH</th>
 	                    <th scope="col" style="color: white;">Ngày tạo</th>
 	                    <th scope="col" style="color: white;">SDT người nhận</th>
-	                    <th scope="col" style="color: white;">Trạng thái đơn hàng</th>
-	                    <th scope="col" style="color: white;">Ngày giao hàng</th>
+	                    <th scope="col" style="color: white;">Trạng thái đơn hàng</th>	
+	                    <th scope="col" style="color: white;">Thành tiền</th>                    
 	                    <th scope="col" style="color: white;">Tuỳ chỉnh</th>
 	                  </tr>
 	                </thead>
@@ -132,7 +132,8 @@
 		                 	<td>${o.ngayTaoDon }</td>
 		                 	<td>${o.sdtNguoiNhan }</td>
 		                 	<td>${o.trangThaiDonHang }</td>
-		                 	<td>${o.ngayGiaoHang }</td>
+		                 	<td>${o.thanhTien } <span style="color: #bdc3c7">VNĐ</span></td>
+		                
 		                 	     
 		                 	<td>	                 		
 		                 		<a href="detail?maDH=${o.maDH}"><button type="button" class="btn btn-success"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></button></a>
@@ -143,13 +144,13 @@
 										</button>
 									</a>
 								</c:if> 
-								<c:if test="${o.trangThaiDonHang == 'Chờ xử lý'}">
+						
 									<a onclick="return showMess(${o.maDH})" href="delete?maDH=${o.maDH }&numPageNV=1">
 										<button type="button" class="btn " style="background: #e74c3c">
 											<i class="fa-sharp fa-solid fa-trash" style="color: #ffffff"></i>
 										</button>
 									</a>
-								</c:if>                 		
+						              		
 		                 	</td>
 	                  	</tr>
 	                	</c:forEach> 
@@ -166,7 +167,7 @@
 	                    <th scope="col" style="color: white;">Ngày tạo</th>
 	                    <th scope="col" style="color: white;">SDT người nhận</th>
 	                    <th scope="col" style="color: white;">Trạng thái đơn hàng</th>
-	                    <th scope="col" style="color: white;">Ngày giao hàng</th>
+	                    <th scope="col" style="color: white;">Thành tiền</th>
 	                    <th scope="col" style="color: white;">Tuỳ chỉnh</th>
 	                  </tr>
 	                </thead>
@@ -177,7 +178,7 @@
 			                 	<td>${o.ngayTaoDon }</td>
 			                 	<td>${o.sdtNguoiNhan }</td>
 			                 	<td>${o.trangThaiDonHang }</td>
-			                 	<td>${o.ngayGiaoHang }</td>
+			                 	<td>${o.thanhTien } <span style="color: #bdc3c7">VNĐ</span></td>
 			                 	<td>
 			                 		<a href="detail?maDH=${o.maDH}&idKH=${sessionScope.acc.tenDN}"><button type="button" class="btn btn-success"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></button></a>	                 		
 		                 			<a onclick="return showMessDeleteKH(${o.maDH})" href="delete?idKH=${sessionScope.acc.tenDN }&maDH=${o.maDH }&numPage=1">

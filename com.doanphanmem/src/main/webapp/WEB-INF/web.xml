@@ -194,4 +194,23 @@
     <servlet-name>FilterControllerByNV</servlet-name>
     <url-pattern>/FilterControllerByNV</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ThongKeController</display-name>
+    <servlet-name>ThongKeController</servlet-name>
+    <servlet-class>com.doanphanmem.controller.ThongKeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThongKeController</servlet-name>
+    <url-pattern>/ThongKeController</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>LuotTruyCap</display-name>
+    <filter-name>LuotTruyCap</filter-name>
+    <filter-class>com.doanphanmem.filter.LuotTruyCap</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LuotTruyCap</filter-name>
+    <url-pattern>/LuotTruyCap</url-pattern>
+  </filter-mapping>
 </web-app>
