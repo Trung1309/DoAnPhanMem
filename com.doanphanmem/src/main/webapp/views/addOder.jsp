@@ -27,7 +27,7 @@
             </div>
             <p class="text-success" style="font-size: 20px; background: #d8ecdc;color: #2d5b42; 
             	margin-left:100px; border-radius: 10px;">${messSuccsess}</p>
-            <form action="addOrder" method="post">
+            <form action="addOrder" method="post" enctype="multipart/form-data">
                 <div class="content-order">
                     <div class="title">
                         THÔNG TIN ĐƠN HÀNG
@@ -42,7 +42,10 @@
                                 <span>Họ và tên <strong style="color: red; margin-left: 10px;">*</strong></span><br>
                                 <input type="text" placeholder="" class="input-1" value="${sessionScope.acc.hoTen }">
                             </div>
-                            
+                            <div class="input-txt">
+                                <span>Địa chỉ nhận hàng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
+                                <input name="diaChiNhanHang" type="text" placeholder="" class="input-1" value="${sessionScope.acc.diaChi },${sessionScope.acc.phuongXa },${sessionScope.acc.quanHuyen },${sessionScope.acc.tinhThanh }">
+                            </div>
                            
                             <div class="input-txt">
                                 <span>Địa chỉ giao hàng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
@@ -50,39 +53,46 @@
                             </div>
                             <div class="input-txt">
                                 <span>Chọn tỉnh thành <strong style="color: red; margin-left: 10px;">*</strong></span><br>
-                                <select name="tinhThanh" class="form-select" aria-label="Default select example">
-                                    <option selected>Chọn tỉnh</option>
-                                    <option value="TP Đà Nẵng">TP Đà Nẵng</option>
-                                    <option value="Gia Lai">Gia Lai</option>
-                                    <option value="Hà Tĩnh">Hà Tĩnh</option>
-                                    <option value="Huế">Huế</option>
-                                  </select>
+                                	<select name="tinhThanh" class="form-select" aria-label="Default select example" >
+                                		 <option value="TP Đà Nẵng" >TP Đà Nẵng</option>
+                                		 <option value="tỉnh Thừa Thiên Huế" >tỉnh Thừa Thiên Huế</option>
+                                		 <option value="tỉnh Quảng Trị" >tỉnh Quảng Trị</option>
+                                		 <option value="tỉnh Quảng Bình" >tỉnh Quảng Bình</option>
+                                		 <option value="tỉnh Hà Tỉnh" >tỉnh Hà Tỉnh</option>
+                                		
+                                  	</select>
                             </div>
                         
-                            <div class="row-1">
-                                <div class="input-txt">
+                            <div class="input-txt">
                                     <span>Quận /huyện<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                    <select name="quanHuyen" class="form-select" aria-label="Default select example">
-                                        <option selected>Quận huyện</option>
-                                        <option value="Hải Châu">Hải Châu</option>
-                                        <option value="Liên Chiểu">Liên Chiểu</option>
-                                        <option value="Sơn Trà">Sơn Trà</option>
+                                    <select name="quanHuyen" class="form-select" aria-label="Default select example" id="district">
+                                        <option value="" selected>Quận huyện</option>
+                                        <option value="huyện IaGrai" >huyện IaGrai</option>
+                                		 <option value="huyện IaTo" >huyện IaTo</option>
+                                		 <option value="huyện Chư Pứ" >huyện Chư Pứ</option>
+                                        <option value="q. Hải Châu" >q Hải Châu</option>
+                                		 <option value="q. Liên Chiểu" >q Liên Chiểu</option>
+                                		 <option value="q. Ngũ Hành Sơn" >q. Ngũ Hành Sơn</option>
                                       </select>
                                 </div>
                                 
                                 <div class="input-txt">
                                     <span>Phường / xã<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                    <select name="phuongXa" class="form-select" aria-label="Default select example">
-                                        <option selected>Phường / xã</option>
-                                        <option value="P.Thanh Bình">P.Thanh Bình</option>
-                                        <option value="P.Thanh Khê">P.Thanh Khê</option>
-                                        <option value="P.Thuận Phước">P.Thuận Phước </option>
-                                        <option value="P.Thạch Thang ">P.Thạch Thang : </option>
+                                    <select name="phuongXa" class="form-select" aria-label="Default select example" id="ward" >
+                                        <option value="" selected>Phường / xã</option>
+                                         <option value="xã IaYok" >xã IaYok</option>
+                                		 <option value="xã IaSao" >xã IaSao</option>
+                                		 <option value="xã IaKlai" >xã IaKlai</option>
+                                        <option value="p. Thanh Bình" >p. Thanh Bình</option>
+                                		 <option value="p. Thuận Phước" >p. Thuận Phước</option>
+                                		 <option value="p. Thạch Thang" >p. Thạch Thang</option>
                                       </select>
-                                </div>
-                            </div>
+                                </div>	
                             
                         </div>
+                        
+                         
+                        
                         <div class="col">
                          	<div class="input-txt">
                                 <span>Tên người nhận <strong style="color: red; margin-left: 10px;">*</strong></span><br>
@@ -104,9 +114,9 @@
                                 <span>Dịch vụ vận chuyển<strong style="color: red; margin-left: 10px;">*</strong></span>
                                 <select name="dichVu" class="form-select" aria-label="Default select example">
                                     <option selected>Dịch vụ vận chuyển</option>
-                                    <option value="Chuyển phát nhanh">Chuyển phát nhanh</option>
-                                    <option value="Vận chuyển cơ bản">Vận chuyển cơ bản</option>
-                                    <option value="Vận chuyển quốc tế">Vận chuyển quốc tế</option>
+                                    <option value="20000">Vận chuyển cơ bản <span style="color:red">(20000VNĐ/1kg)</span></option>
+                                    <option value="35000">Chuyển phát nhanh <span style="color:red">(35000VNĐ/1kg)</span></option>
+                                    <option value="50000">Vận chuyển quốc tế <span style="color:red">(50000VNĐ/1kg)</span></option>
                                     </select>
                             </div>
                 			
@@ -126,13 +136,13 @@
                                 <input name="tenSP" type="text" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
-                                <span>Loại sản phẩm<strong style="color: red; margin-left: 10px;">*</strong></span>
-                                <select  class="form-select" aria-label="Default select example">
+                                <span>Loại khối lượng sản phẩm<strong style="color: red; margin-left: 10px;">*</strong></span>
+                                <select name="loaiGoiCuoc"  class="form-select" aria-label="Default select example">
                                     <option selected>Loại sản phẩm</option>
-                                    <option value="1">Thực phẩm</option>
-                                    <option value="2">Hàng dễ vỡ</option>
-                                    <option value="3">Hàng da dụng</option>
-                                    <option value="4">Đồ điện tử</option>
+                                    <option value="Hàng dễ vỡ">Hàng dễ vỡ</option>
+                                    <option value="Hàng da dụng">Hàng da dụng</option>
+                                    <option value="Đồ điện tử">Đồ điện tử</option>
+                                    <option value="Đồ thời trang"> > Đồ thời trang</option>
                                     </select>
                             </div>
                             <div class="input-txt">
@@ -140,7 +150,7 @@
                                 <input name="soLuong" type="number" placeholder="" class="input-1">
                             </div>
                             <div class="input-txt">
-                                <span>Khối lượng <strong style="color: red; margin-left: 10px;">*</strong></span><br>
+                                <span>Khối lượng (kg) <strong style="color: red; margin-left: 10px;">*</strong></span><br>
                                 <input name="khoiLuong" type="number" placeholder="" class="input-1">
                             </div>
                             
@@ -151,7 +161,7 @@
                                 <label for="formFileMultiple" class="upload"><i class="fa-solid fa-upload" style="color: #e74c3c; font-size: 100px;" ></i>
                                 </label>                            
                                 <label for="formFileMultiple" class="form-label">Kéo thả hoặc tải lệp lên</label>
-                                <input class="form-control" type="file" id="formFileMultiple" multiple />                     
+                                <input name="hinhAnh" class="form-control" type="file" id="formFileMultiple" multiple />                     
                                 
                             </div>                          
                         </div>
@@ -164,15 +174,19 @@
             </form>
         </div>
     </div>
+   
 	<%@ include file="footter.jsp" %>
 	
 	<script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+    type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
     ></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	 
+	
+	<script src="<c:url value="/js/tinhThanh.js"></c:url>"></script>
 </body>
 </html>

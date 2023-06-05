@@ -1,6 +1,6 @@
-﻿create database DTB_Nhom9_01118
+﻿create database DTB_Nhom9_01116
 go
-use DTB_Nhom9_01118
+use DTB_Nhom9_01116
 go 
 
 create table tbl_ChucVu
@@ -30,7 +30,6 @@ create table tbl_phongBan
 	maPB nvarchar(10) not null primary key,
 	tenPB nvarchar(50)
 )
-
 
 go
 create table tbl_banQuanLy
@@ -116,7 +115,11 @@ create table tbl_KhachHang
 	Email 	nvarchar(50),
 	Sdt	Nchar(20),
 	Cccd	Nchar(20),
-	Id_PX	Varchar(10) foreign key references tbl_PhuongXa(Id_PX)
+	Id_PX	Varchar(10) foreign key references tbl_PhuongXa(Id_PX),
+	diaChi nvarchar(max),
+	phuongXa nvarchar(max),
+	quanHuyen nvarchar(max),
+	tinhThanh nvarchar(max)
 )
 go
 create table tbl_GoiCuoc
@@ -146,7 +149,7 @@ create table tbl_DonHang
 (
 	MaDH int identity(1,1) not null primary key,	
 	SdtNguoiNhan 	Nvarchar(20),
-	NgayTaoDon	nvarchar(50),
+	NgayTaoDon	date,
 	donGia nvarchar(50),
 	NgayGiaoHang nvarchar(50),
 	TrangThaiDonHang	Nvarchar(MAX),
@@ -155,7 +158,7 @@ create table tbl_DonHang
 	hinhAnh nvarchar(max),
 	TenTKKH	Nvarchar(10) foreign key references tbl_KhachHang(TenTKKH),
 	TenTKNV	nvarchar(30) foreign key references tbl_nhanVien(TenTKNV),
-	MaGoiCuoc	nvarchar(10) foreign key references tbl_GoiCuoc(MaGoiCuoc),
+	MaGoiCuoc	int,
 	MaVC	INT foreign key references tbl_VanChuyen(MaVC),
 	phuongXa nvarchar(50),
 	quanHuyen nvarchar(50),
@@ -165,8 +168,10 @@ create table tbl_DonHang
 	khoiLuong int ,
 	soLuong int,
 	hoTenNguoiNhan nvarchar(50),
-	loaiGoiCuoc nvarchar(50)
+	loaiGoiCuoc nvarchar(50),
+	diaChiNhanHang nvarchar(max)
 )
+
 
 go
 create table tbl_ChiTietDonHang
@@ -222,12 +227,14 @@ AS
 	PRINT N'Lỗi';
 	THROW
 	END CATCH
-		
+	
+
 drop proc DBO.proc_taoDonHang
 GO
 --Proc tạo đơn hàng --
 CREATE PROCEDURE DBO.proc_taoDonHang(
 	@tenNguoiNhan nvarchar(50),
+	@diaChiNhanHang nvarchar(max),
 	@diaChiGiaoHang nvarchar(50),
 	@tinhThanh nvarchar(50),
 	@quanHuyen nvarchar(50),
@@ -237,14 +244,16 @@ CREATE PROCEDURE DBO.proc_taoDonHang(
 	@khoiLuong int,
 	@tenSP nvarchar(50),
 	@soLuong int,
-	@tenTKKH nvarchar(50)
+	@tenTKKH nvarchar(50),
+	@loaiGoiCuoc nvarchar(50),
+	@hinhAnh nvarchar(50)
 )
 AS
 	BEGIN TRY
 	INSERT INTO tbl_DonHang
-	(hoTenNguoiNhan,NgayTaoDon,DiaChiGH,tinhThanh,quanHuyen, phuongXa,SdtNguoiNhan,loaiGoiCuoc,khoiLuong,tenSP,soLuong,TenTKKH,TrangThaiDonHang)
+	(hoTenNguoiNhan,diaChiNhanHang,NgayTaoDon,DiaChiGH,tinhThanh,quanHuyen, phuongXa,SdtNguoiNhan,MaGoiCuoc,khoiLuong,tenSP,soLuong,TenTKKH,TrangThaiDonHang,loaiGoiCuoc,hinhAnh)
 	VALUES(
-	@tenNguoiNhan,FORMAT (getdate(), 'dd/MM/yyyy, hh:mm:ss tt'),@diaChiGiaoHang,@tinhThanh,@quanHuyen,@phuongXa,@sdtNguoiNhan,@dichVu,@khoiLuong,@tenSP,@soLuong,@tenTKKH,N'Chờ xử lý')
+	@tenNguoiNhan,@diaChiNhanHang,FORMAT (getdate(), 'MM-dd-yyyy'),@diaChiGiaoHang,@tinhThanh,@quanHuyen,@phuongXa,@sdtNguoiNhan,@dichVu,@khoiLuong,@tenSP,@soLuong,@tenTKKH,N'Chờ xử lý',@loaiGoiCuoc,@hinhAnh)
 	END TRY
 	BEGIN CATCH
 	PRINT N'Lỗi';
@@ -253,9 +262,20 @@ AS
 GO
 
 --end proc--
-
-SELECT *
-FROM tbl_DonHang
-WHERE MaDH = 52
+select *
+from tbl_DonHang
 
 
+select sum((dh.soLuong * dh.khoiLuong * gc.GiaCuoc))
+from tbl_DonHang as dh, tbl_GoiCuoc as gc
+where dh.MaGoiCuoc = gc.MaGoiCuoc
+
+select dh.SdtNguoiNhan, dh.hoTenNguoiNhan,dh.DiaChiGH,dh.phuongXa,dh.quanHuyen,dh.tinhThanh,dh.NgayTaoDon,dh.TrangThaiDonHang,dh.tenSP,nv.TenNV,kh.diaChi,dh.MaDH,kh.TenKH
+from tbl_nhanVien as nv, tbl_KhachHang as kh,tbl_DonHang as dh
+where  dh.MaDH = 78 and dh.TenTKKH = kh.TenTKKH 
+group by MaDH
+
+
+
+select *
+from Don

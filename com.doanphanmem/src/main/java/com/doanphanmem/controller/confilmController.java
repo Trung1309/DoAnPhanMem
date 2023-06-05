@@ -47,7 +47,7 @@ public class confilmController extends HttpServlet {
 		
 		//Thiết lập số trang nhân viên
 		int countTotalDH = dao.getTotalAllDonHang();
-		int soLuongDHNV = 6;
+		int soLuongDHNV = 10;
 		int endPNV = countTotalDH/soLuongDHNV;
 		List<DonHang> listAllDonHangNV = dao.getAllPagingDonHang(numPageNV, soLuongDHNV);
 		if (countTotalDH % soLuongDHNV != 0) {

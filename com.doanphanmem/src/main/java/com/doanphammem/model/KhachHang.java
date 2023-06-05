@@ -9,6 +9,10 @@ public class KhachHang {
 	private String sdt;
 	private String cccd;
 	private String idPX;
+	private String diaChi;
+	private String phuongXa;
+	private String quanHuyen;
+	private String tinhThanh;
 	public String getTenDN() {
 		return tenDN;
 	}
@@ -57,11 +61,36 @@ public class KhachHang {
 	public void setIdPX(String idPX) {
 		this.idPX = idPX;
 	}
+
+	public String getDiaChi() {
+		return diaChi;
+	}
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+	public String getPhuongXa() {
+		return phuongXa;
+	}
+	public void setPhuongXa(String phuongXa) {
+		this.phuongXa = phuongXa;
+	}
+	public String getQuanHuyen() {
+		return quanHuyen;
+	}
+	public void setQuanHuyen(String quanHuyen) {
+		this.quanHuyen = quanHuyen;
+	}
+	public String getTinhThanh() {
+		return tinhThanh;
+	}
+	public void setTinhThanh(String tinhThanh) {
+		this.tinhThanh = tinhThanh;
+	}
 	public KhachHang() {
 		super();
 	}
 	public KhachHang(String tenDN, int maQuyen, String matKhau, String hoTen, String email, String sdt, String cccd,
-			String idPX) {
+			String idPX, String diaChi, String phuongXa, String quanHuyen, String tinhThanh) {
 		super();
 		this.tenDN = tenDN;
 		this.maQuyen = maQuyen;
@@ -71,12 +100,19 @@ public class KhachHang {
 		this.sdt = sdt;
 		this.cccd = cccd;
 		this.idPX = idPX;
+		this.diaChi = diaChi;
+		this.phuongXa = phuongXa;
+		this.quanHuyen = quanHuyen;
+		this.tinhThanh = tinhThanh;
 	}
 	@Override
 	public String toString() {
 		return "KhachHang [tenDN=" + tenDN + ", maQuyen=" + maQuyen + ", matKhau=" + matKhau + ", hoTen=" + hoTen
-				+ ", email=" + email + ", sdt=" + sdt + ", cccd=" + cccd + ", idPX=" + idPX + "]";
+				+ ", email=" + email + ", sdt=" + sdt + ", cccd=" + cccd + ", idPX=" + idPX + ", diaChi=" + diaChi
+				+ ", phuongXa=" + phuongXa + ", quanHuyen=" + quanHuyen + ", tinhThanh=" + tinhThanh + "]";
 	}
+
+	
 	
 	
 }
