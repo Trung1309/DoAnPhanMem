@@ -49,6 +49,7 @@ public class SearchControllerByNV extends HttpServlet {
 		}else {
 			request.setAttribute("messNotFound", "Không tìm thấy đơn hàng");
 		}
+		request.setAttribute("txtSearch", txtSearch);
 		request.getRequestDispatcher("/views/manager.jsp").forward(request, response);
 
 	}

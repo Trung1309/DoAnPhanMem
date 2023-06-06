@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="com.doanphanmem.connect.DatabaseHelper" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,9 +50,10 @@
         	<c:if test="${sessionScope.acc.maQuyen == 3 }">       		
 	        		<div class="row-one">
 	                <form action="searchByNV" method="post" class="search-box">
-	                    <input name="txt" type="text" placeholder="Nhập mã đơn hàng hoặc sdt người nhận	">
+	                    <input name="txt" type="text" placeholder="Nhập mã đơn hàng hoặc sdt người nhận	" value="${txtSearch }">
 	                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-	                </form>	                
+	                </form>	    
+	                     
 	            </div>           
 	            <div >
 	                <form action="filterByNV" method="post" class="filter">
@@ -62,7 +65,34 @@
 						  <option value="Đang Giao">Đang Giao</option>
 						  <option value="Đã giao">Đã giao</option>
 						</select>
+						
 	                </div>
+	                <div class="dropdown">
+	                	<div class="title-filter">Khu vực</div>
+	                	<select  name="txtKhuVuc" class="form-select" aria-label="Default select example">
+						  <option selected="${txtTT }" >Tất cả</option>
+						  <%
+						  		try{
+						  			String sql = "select tinhThanh from tbl_DonHang group by tinhThanh ";
+							   		Connection conn = new DatabaseHelper().openConnection();
+							  		PreparedStatement ps = conn.prepareStatement(sql);
+							  		ResultSet rs = ps.executeQuery();
+							  		while(rs.next()){
+							  			String tinhThanh = rs.getString("tinhThanh");
+							  	        %>
+							  	                <option value="<%=tinhThanh %>"><%= tinhThanh %></option>
+							  	        <% 
+							  		}
+						  		}catch(Exception ex){
+						  			
+						  		}
+						 
+						  %>
+						  
+						  
+						</select>
+	                </div>
+	                
 	                <div class="dropdown">
 	                    <div class="title-filter">Từ ngày</div>
 	                    <p>Date: <input type="text" id="datepicker" value="${minDay }"></p>
@@ -85,17 +115,20 @@
 	                <c:if test="${sessionScope.acc.maQuyen == 4 }">
 	                	<a href="addOrder"><button class="btn-add"><i class="fa-solid fa-plus" style="color: white; margin-right: 15px;"></i>Tạo đơn hàng</button></a>
 	        		</c:if>
+	        		
 	            </div>           
 	            <div >
 	                <form action="filter?maKH=${sessionScope.acc.tenDN }" method="post" class="filter">
 	                	<div class="dropdown">
 	                    <div class="title-filter">Trạng thái</div>
 	                    <select  name="txtTrangThai" class="form-select" aria-label="Default select example">
-						  <option selected="${txtTT }" ></option>
+						  <option selected="${txtTT }" >Tất cả</option>
 						  <option value="Chờ xử lý">Chờ xử lý</option>
 						  <option value="Đang Giao">Đang Giao</option>
 						  <option value="Đã giao">Đã giao</option>
 						</select>
+						
+						
 	                </div>
 	                <div class="dropdown">
 	                    <div class="title-filter">Từ ngày</div>
@@ -120,8 +153,8 @@
 	                    <th scope="col" style="color: white;">Mã DH</th>
 	                    <th scope="col" style="color: white;">Ngày tạo</th>
 	                    <th scope="col" style="color: white;">SDT người nhận</th>
-	                    <th scope="col" style="color: white;">Trạng thái đơn hàng</th>
-	                    <th scope="col" style="color: white;">Ngày giao hàng</th>
+	                    <th scope="col" style="color: white;">Trạng thái đơn hàng</th>	
+	                    <th scope="col" style="color: white;">Thành tiền</th>                    
 	                    <th scope="col" style="color: white;">Tuỳ chỉnh</th>
 	                  </tr>
 	                </thead>
@@ -132,10 +165,27 @@
 		                 	<td>${o.ngayTaoDon }</td>
 		                 	<td>${o.sdtNguoiNhan }</td>
 		                 	<td>${o.trangThaiDonHang }</td>
-		                 	<td>${o.ngayGiaoHang }</td>
+		                 	<td>${o.thanhTien } <span style="color: #bdc3c7">VNĐ</span></td>
+		                
 		                 	     
-		                 	<td>	                 		
-		                 		<a href="detail?maDH=${o.maDH}"><button type="button" class="btn btn-success"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></button></a>
+		                 	<td>
+		                 		<c:choose>
+    								<c:when test="${o.trangThaiDonHang=='Đang Giao' or o.trangThaiDonHang=='Đã giao'}">
+        								<a href="detailOrderNV?maDH=${o.maDH}">
+	        								<button type="button" class="btn btn-success">
+	        									<i class="fa-solid fa-eye" style="color: #ffffff;"></i>
+	        								</button>
+	        							</a>
+    								</c:when>    
+	    							<c:otherwise>
+	        							<a href="detail?maDH=${o.maDH}">
+	        								<button type="button" class="btn btn-success">
+	        									<i class="fa-solid fa-eye" style="color: #ffffff;"></i>
+	        								</button>
+	        							</a>	        							        					
+	    							</c:otherwise>
+								</c:choose>	                 		
+		                 		
 								<c:if test="${o.trangThaiDonHang == 'Chờ xử lý'}">
 									<a onclick="return showMessCF(${o.maDH})" href="confilm?maNV=${sessionScope.acc.tenDN }&maDH=${o.maDH }">
 										<button type="button" class="btn btn-primary">
@@ -143,13 +193,13 @@
 										</button>
 									</a>
 								</c:if> 
-								<c:if test="${o.trangThaiDonHang == 'Chờ xử lý'}">
+						
 									<a onclick="return showMess(${o.maDH})" href="delete?maDH=${o.maDH }&numPageNV=1">
 										<button type="button" class="btn " style="background: #e74c3c">
 											<i class="fa-sharp fa-solid fa-trash" style="color: #ffffff"></i>
 										</button>
 									</a>
-								</c:if>                 		
+						              		
 		                 	</td>
 	                  	</tr>
 	                	</c:forEach> 
@@ -166,7 +216,7 @@
 	                    <th scope="col" style="color: white;">Ngày tạo</th>
 	                    <th scope="col" style="color: white;">SDT người nhận</th>
 	                    <th scope="col" style="color: white;">Trạng thái đơn hàng</th>
-	                    <th scope="col" style="color: white;">Ngày giao hàng</th>
+	                    <th scope="col" style="color: white;">Thành tiền</th>
 	                    <th scope="col" style="color: white;">Tuỳ chỉnh</th>
 	                  </tr>
 	                </thead>
@@ -177,9 +227,24 @@
 			                 	<td>${o.ngayTaoDon }</td>
 			                 	<td>${o.sdtNguoiNhan }</td>
 			                 	<td>${o.trangThaiDonHang }</td>
-			                 	<td>${o.ngayGiaoHang }</td>
+			                 	<td>${o.thanhTien } <span style="color: #bdc3c7">VNĐ</span></td>
 			                 	<td>
-			                 		<a href="detail?maDH=${o.maDH}&idKH=${sessionScope.acc.tenDN}"><button type="button" class="btn btn-success"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></button></a>	                 		
+			                 		<c:choose>
+	    								<c:when test="${o.trangThaiDonHang=='Đang Giao' or o.trangThaiDonHang=='Đã giao'}">
+	        								<a href="detail2?maDH=${o.maDH}">
+		        								<button type="button" class="btn btn-success">
+		        									<i class="fa-solid fa-eye" style="color: #ffffff;"></i>
+		        								</button>
+		        							</a>
+	    								</c:when>    
+		    							<c:otherwise>
+		        							<a href="detail?maDH=${o.maDH}">
+		        								<button type="button" class="btn btn-success">
+		        									<i class="fa-solid fa-eye" style="color: #ffffff;"></i>
+		        								</button>
+		        							</a>	        							        					
+		    							</c:otherwise>
+									</c:choose>	
 		                 			<a onclick="return showMessDeleteKH(${o.maDH})" href="delete?idKH=${sessionScope.acc.tenDN }&maDH=${o.maDH }&numPage=1">
 										<button type="button" class="btn " style="background: #e74c3c">
 											<i class="fa-sharp fa-solid fa-trash" style="color: #ffffff"></i>

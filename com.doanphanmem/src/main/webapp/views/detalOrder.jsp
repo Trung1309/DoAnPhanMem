@@ -53,45 +53,59 @@
 <body>
 	<%@ include file="header.jsp" %>
 	<!--  -->
+	
 	<div class="content" style="margin-top: 120px">
 		<div class="container">
+		<h2 style="color: green; margin: 60px 0px">${mess }</h2>
 	    <div class="card">
 	        <div class="card-body">
 	            <h3 class="card-title">Chi tiết đơn hàng</h3>
 	            <div class="row">
 	                <div class="col-lg-5 col-md-5 col-sm-6" style="height: 500px;overflow: hidden;">
-	                    <div class="white-box text-center"><img src="https://www.bootdey.com/image/430x600/00CED1/000000" class="img-responsive"></div>
+	                    <div class="white-box text-center"><img src="<c:url value="/imageOrder/${dt.hinhAnh }"></c:url>" class="img-responsive" style="width: 100%;height: 100%;object-fit:cover"></div>
 	                </div>
-	                <div class="col-lg-7 col-md-7 col-sm-6">
-	                    <h4 class="box-title mt-5">Mô tả</h4>
-	                    <p>Lorem Ipsum available,but the majority have suffered alteration in some form,by injected humour,or randomised words which don't look even slightly believable.but the majority have suffered alteration in some form,by injected humour</p>
-	                    
-	                    <ul class="list-unstyled">
-	                        <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
-	                        <li><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-	                        <li><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful collectibles</li>
-	                    </ul>
-	                </div>
-	                <div class="col-lg-12 col-md-12 col-sm-12">
-	                    <h3 class="box-title mt-5">Thông tin chi tiết</h3>
+	                <div class="col-lg-7 col-md-7 col-sm-6" style="margin-top: -60px">
+	                    <h4 class="box-title mt-5" ">Chi tiết sản phẩm</h4>
 	                    <div class="table-responsive">
 	                        <table class="table table-striped table-product">
 	                            <tbody>
-	                                <tr>
-	                                    <td width="390">Số điện thoại người nhận</td>
-	                                    <td>${dt.sdtNguoiNhan }</td>
+	                            	<tr>
+	                                    <td>Họ tên người gửi</td>
+	                                    <td>${dt.tenKH }</td>
 	                                </tr>
 	                                <tr>
+	                                    <td>Số điện thoại người gửi </td>
+	                                    <td>${dt.sdt }</td>
+	                                </tr>
+	                                <tr>
+	                                    <td>Địa chỉ nhận hàng </td>
+	                                    <td>${dt.diaChiNhanHang }</td>
+	                                </tr>
+	                                 
+	                            	<tr>
+	                                    <td >Số tiền thanh toán </td>
+	                                    <td>${dt.thanhTien} <span style="font-weight: 800">VNĐ</span></td>
+	                                </tr>
+	                                 <tr>
 	                                    <td>Họ tên người nhận</td>
 	                                    <td>${dt.hoTenNguoiNhan}</td>
+	                                </tr>	
+	                                <tr>
+	                                    <td >Số điện thoại người nhận</td>
+	                                    <td>${dt.sdtNguoiNhan }</td>
 	                                </tr>
+	                               
 	                                <tr>
 	                                    <td>Địa chỉ giao hàng</td>
-	                                    <td>${dt.diaChiGH }, ${dt.phuongXa },${dt.quanHuyen },${dt.tinhThanh }</td>
+	                                    <td>${dt.diaChiGH }  ${dt.phuongXa } ${dt.quanHuyen } ${dt.tinhThanh }</td>
 	                                </tr>
 	                                <tr>
 	                                    <td>Ngày tạo đơn</td>
 	                                    <td>${dt.ngayTaoDon }</td>
+	                                </tr>
+	                                 <tr>
+	                                    <td>Tài xế vận chuyển</td>
+	                                    <td>${dt.tenNV }</td>
 	                                </tr>
 	                                <tr>
 	                                    <td>Ngày giao hàng</td>
@@ -112,12 +126,14 @@
 	                                
 	                            </tbody>
 	                        </table>
+	                        
 	                    </div>
 	                </div>
+	                </div>
+	                
 	            </div>
 	        </div>
 	    </div>
-	</div>
 	</div>
 	<%@ include file="footter.jsp" %>
 	
@@ -125,7 +141,19 @@
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
     ></script>
-
+	<script type="text/javascript">
+		function showMess(id) {
+			var option = confirm('Bạn có chắc chắn huỷ đơn hàng này không');
+			if(option == true){
+				window.location.href = ''
+				return false;
+				
+			}else {
+				window.location.href = ''
+				return false;
+			}
+		}	
+	</script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

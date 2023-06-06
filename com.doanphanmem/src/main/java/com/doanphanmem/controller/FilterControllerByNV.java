@@ -41,9 +41,11 @@ public class FilterControllerByNV extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String trangThai = request.getParameter("txtTrangThai");
+		String khuVuc= request.getParameter("txtKhuVuc");
 		DonHangDao d = new DonHangDao();
 		
-		List<DonHang> list = d.filterDonHangByNV(trangThai);
+		List<DonHang> list = d.filterDonHangByNV(trangThai,khuVuc);
+		
 		request.setAttribute("listAllDH", list);
 		request.setAttribute("txtTT", trangThai);
 		request.getRequestDispatcher("/views/manager.jsp").forward(request, response);

@@ -29,7 +29,11 @@ public class SignUpDao {
 						rs.getString(5), 
 						rs.getString(6), 
 						rs.getString(7), 
-						rs.getString(8));			
+						rs.getString(8),
+						rs.getString(9),
+						rs.getString(10),
+						rs.getString(11),
+						rs.getString(12));			
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.doanphammem.model.DonHang;
+import com.doanphammem.model.DonHangDetail;
 import com.doanphanmem.dao.DonHangDao;
 
 /**
@@ -32,12 +33,10 @@ public class detailController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		String maDH = request.getParameter("maDH");
-		int id = Integer.parseInt(maDH);
 		
 		DonHangDao d = new DonHangDao();
-		DonHang detailDH = d.getDetailDonHang(id);
-		
-		request.setAttribute("dt", detailDH);
+		DonHangDetail detail = d.getDetailDonHang2KH(maDH);
+		request.setAttribute("dt", detail);
 		request.getRequestDispatcher("/views/detalOrder.jsp").forward(request, response);
 
 	
